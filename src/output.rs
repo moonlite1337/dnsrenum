@@ -1,8 +1,6 @@
-
-
 #[macro_export]
-macro_rules! printip {
-    ($name:expr, $ttl:expr, $class:expr, $tpe:expr, $ip:expr) => {
-        println!("{0: <10} | {1} | {2: <10} | {3: <10} | {4: <10}", $name, $ttl, $class, $tpe, $ip);
+macro_rules! print_record {
+    ($r:expr, &Record) => {
+        println!("{0}\t{1}\t{2}\t{3}\t{4}", $r.name(), $r.ttl(), $r.dns_class(), $r.record_type(), $r.data().unwrap());
     };
 }
