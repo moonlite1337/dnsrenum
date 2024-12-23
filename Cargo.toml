@@ -1,11 +1,21 @@
 [package]
 name = "dnsrenum"
 version = "0.1.0"
+authors = ["moonlite37 <moonlite37@proton.me>"]
+homepage = "https://github.com/moonlite1337/dnsrenum"
+repository = "https://github.com/moonlite1337/dnsrenum"
 edition = "2021"
+description = "No dependency dnsenum to enumerate your favourite records 🦀."
+keywords = ["dnsenum", "pentesting", "hacking"]
+categories = ["command-line-utilities"]
+readme = "README.md"
 
 [dependencies]
 argh = "0.1.13"
 colored = "2.2.0"
 hickory-resolver = "0.24.2"
 hickory-client = "0.24.2"
-futures = "0.3.31"
+
+[[bin]]
+name = "dnsrenum"
+path = "src/main.rs"

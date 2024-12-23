@@ -1,22 +1,24 @@
-mod input;
-mod scanner;
-mod stdout;
-
 use argh;
 use colored::Colorize;
 use hickory_client::client::{Client, SyncClient};
 use hickory_client::rr::Name;
 use hickory_client::udp::UdpClientConnection;
+
+mod input;
+mod scanner;
+mod stdout;
+
 use input::Options;
-use std::error::Error;
+use scanner::Scanner;
+use stdout::print_records;
 
 fn main() {
     let opts: Options = argh::from_env();
-    let s = scanner::Scanner::new(opts.host, None).unwrap();
+    let s = Scanner::new(opts.host, None).unwrap();
     let info = s.run().unwrap_or_else(|err| panic!("{}", err));
-    stdout::print_records("Host addresses:", info.ips);
-    stdout::print_records("Name servers:", info.ns);
-    stdout::print_records("MX records:", info.mx);
+    print_records("Host addresses:", info.ips);
+    print_records("Name servers:", info.ns);
+    print_records("MX records:", info.mx);
 
     println!(
         "\n{}\n",
