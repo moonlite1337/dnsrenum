@@ -6,10 +6,10 @@ https://github.com/fwaeytens/dnsenum
 
 Note: kali uses different (more up to date) version of dnsenum script.
 
-Features to add:
+Features to add:domain transfer
 - [x] basic DNS lookup
 - [ ] help string
 - [ ] records config
-- [ ] domain transfer
+- [ ] zone transfer
 - [ ] configure release mgmt
 - [ ] kali package
