@@ -1,23 +1,23 @@
 mod input;
-mod output;
 mod scanner;
+mod stdout;
 
-use crate::scanner::DNS;
 use argh;
 use colored::Colorize;
 use hickory_client::client::{Client, SyncClient};
 use hickory_client::rr::Name;
 use hickory_client::udp::UdpClientConnection;
-use hickory_resolver::Resolver;
 use input::Options;
+use std::error::Error;
 
 fn main() {
     let opts: Options = argh::from_env();
-    let resolver = Resolver::from_system_conf().unwrap();
+    let s = scanner::Scanner::new(opts.host, None).unwrap();
+    let info = s.run().unwrap_or_else(|err| panic!("{}", err));
+    stdout::print_records("Host addresses:", info.ips);
+    stdout::print_records("Name servers:", info.ns);
+    stdout::print_records("MX records:", info.mx);
 
-    // todo!("extract lookup into separate mod");
-    let scanner = scanner::Scanner::new(opts.host, None).unwrap();
-    let i = scanner.run().unwrap();
     println!(
         "\n{}\n",
         "Trying Zone Transfers and getting Bind Versions:"
