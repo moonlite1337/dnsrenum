@@ -1,18 +1,15 @@
 mod input;
 mod output;
 
-use std::net::{SocketAddr, UdpSocket};
-use std::sync::Arc;
 use argh;
 use colored::Colorize;
-use hickory_client::client::{AsyncClient, SyncClient};
+use hickory_client::client::AsyncClient;
 use hickory_client::op::DnsResponse;
-use hickory_client::rr::{DNSClass, Name as clName, RecordType};
-use hickory_client::tcp::TcpClientConnection;
+use hickory_client::rr::{DNSClass, Name, RecordType};
 use hickory_client::udp::UdpClientStream;
 use input::Options;
-use trust_dns_resolver::{Resolver};
-use trust_dns_resolver::proto::rr::RecordType as tRecordType;
+use std::net::{SocketAddr, UdpSocket};
+use hickory_resolver::Resolver;
 
 fn main() {
     let opts: Options = argh::from_env();
@@ -27,8 +24,8 @@ fn main() {
         l.as_lookup().records().iter().for_each(|r| {print_record!(r, &Record)});
     });
 
-    let mut nameservers: Vec<&trust_dns_resolver::Name> = Vec::new();
-    resolver.lookup(&opts.host, tRecordType::NS).map_or_else(|e| {
+    let mut nameservers: Vec<&Name> = Vec::new();
+    resolver.lookup(&opts.host, RecordType::NS).map_or_else(|e| {
         println!("\nno host addresses found. Exiting..");
         return;
     }, |l| {
@@ -39,7 +36,7 @@ fn main() {
         });
     });
 
-    resolver.lookup(&opts.host, tRecordType::MX).map_or_else(|e| {
+    resolver.lookup(&opts.host, RecordType::MX).map_or_else(|e| {
         println!("\nno host addresses found. Exiting..");
         return;
     }, |l| {
@@ -55,7 +52,7 @@ fn main() {
     // todo!("configure loop")
     let (client, bg) = AsyncClient::connect(stream).await?;
     let response: DnsResponse = client.zone_tranfer(
-        &clName::from_utf8("example.com").unwrap(),
+        &Name::from_utf8("example.com").unwrap(),
         DNSClass::IN,
         RecordType::AXFR,
     )?;
