@@ -1,10 +1,12 @@
 mod input;
 mod output;
+mod scanner;
 
+use crate::scanner::DNS;
 use argh;
 use colored::Colorize;
 use hickory_client::client::{Client, SyncClient};
-use hickory_client::rr::{Name, RecordType};
+use hickory_client::rr::Name;
 use hickory_client::udp::UdpClientConnection;
 use hickory_resolver::Resolver;
 use input::Options;
@@ -14,46 +16,8 @@ fn main() {
     let resolver = Resolver::from_system_conf().unwrap();
 
     // todo!("extract lookup into separate mod");
-    resolver.lookup_ip(&opts.host).map_or_else(
-        |e| {
-            println!("\nno host addresses found. Exiting..");
-            return;
-        },
-        |l| {
-            println!("{}", "Host addresses:".red().underline());
-            l.as_lookup()
-                .records()
-                .iter()
-                .for_each(|r| print_record!(r, &Record));
-        },
-    );
-
-    let mut nameservers: Vec<&Name> = Vec::new();
-    resolver.lookup(&opts.host, RecordType::NS).map_or_else(
-        |e| {
-            println!("\nno host addresses found. Exiting..");
-            return;
-        },
-        |l| {
-            println!("\n{}", "Name servers:".red().underline());
-            l.records().iter().for_each(|r| {
-                nameservers.push(r.name());
-                print_record!(r, &Record)
-            });
-        },
-    );
-
-    resolver.lookup(&opts.host, RecordType::MX).map_or_else(
-        |e| {
-            println!("\nno host addresses found. Exiting..");
-            return;
-        },
-        |l| {
-            println!("\n{}", "Mail (MX) servers:".red().underline());
-            l.records().iter().for_each(|r| print_record!(r, &Record));
-        },
-    );
-
+    let scanner = scanner::Scanner::new(opts.host, None).unwrap();
+    let i = scanner.run().unwrap();
     println!(
         "\n{}\n",
         "Trying Zone Transfers and getting Bind Versions:"
