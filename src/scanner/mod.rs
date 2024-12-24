@@ -1,14 +1,8 @@
+use crate::info::Info;
 use hickory_client::rr::{Record, RecordType};
 use hickory_resolver::error::ResolveError;
 use hickory_resolver::Resolver;
 use std::io;
-
-#[derive(Debug)]
-pub struct Info {
-    pub ns: Vec<Record>,
-    pub ips: Vec<Record>,
-    pub mx: Vec<Record>,
-}
 
 pub struct Scanner {
     host: String,
