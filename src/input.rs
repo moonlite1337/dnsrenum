@@ -1,6 +1,5 @@
 use argh::FromArgs;
 
-// dnsrenum options
 #[derive(FromArgs)]
 #[argh(description = "dnsrenum google.com")]
 pub struct Options {
