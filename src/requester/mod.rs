@@ -1,9 +1,10 @@
+use std::thread;
 use colored::Colorize;
-use hickory_client::client::AsyncClient;
+use hickory_client::client::{AsyncClient, Client, SyncClient};
+use hickory_client::rr::Name;
 use hickory_client::udp::UdpClientConnection;
-use hickory_client::{Client, UdpTransport};
 
-pub fn transfer_zones() {
+pub fn transfer_zones(domain: &String, ns: Vec<String>) {
     // make sure this request does not block
     // todo!("reuse logger with verbosity levels")
     println!(
@@ -13,18 +14,15 @@ pub fn transfer_zones() {
             .underline()
     );
     // https://gokhnayisigi.medium.com/what-is-a-dns-zone-transfer-attack-and-how-to-test-it-12bdc52da086
-    // use futures::executor::block_on;
-    // let tasks = info.ns.iter().for_each(|s| println!("{}", s.name()));
 
-    // let address = "8.8.8.8:53".parse().unwrap();
-    // let conn = UdpClientConnection::new(address).unwrap();
-    // // and then create the Client
-    // let client = SyncClient::new(conn);
-    // let response = client
-    //     .zone_transfer(&Name::from_utf8("example.com").unwrap(), None)
-    //     .unwrap();
+    let handle = ns.map(|ns| {
+        thread::spawn(move || {
+            let address = ns.parse().unwrap();
+            let conn = UdpClientConnection::new(address).unwrap();
+            let client = SyncClient::new(conn);
+            client.zone_transfer(&Name::from_utf8(domain).unwrap(), None)
+        })
+    });
 
-    let address = "ns-884.awsdns-46.net".parse().unwrap();
-    let conn = UdpClientConnection::new(address).unwrap();
-    let client = AsyncClient::new(conn);
+    handle.join().unwrap();
 }
