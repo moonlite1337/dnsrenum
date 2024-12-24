@@ -13,3 +13,4 @@ Features to add:domain transfer
 - [ ] zone transfer
 - [ ] configure release mgmt
 - [ ] kali package
+- [ ] add dns list
