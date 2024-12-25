@@ -12,6 +12,17 @@ use input::Options;
 use scanner::Scanner;
 use stdout::print_records;
 
+// #	1) Get the host's addresse.
+// #	2) Get the nameservers (threaded).
+// #	3) get the MX record (threaded).
+// #	4) Perform axfr queries on nameservers (threaded).
+// #	5) Get extra names via google scraping.
+// #	6) Brute force subdomains from file (threaded).
+// #	7) Calculate C class domain network ranges and perform whois
+// #		queries on them (threaded).
+// #	8) Perform reverse lookups on C class or/and whois
+// #		network ranges (threaded).
+// #	9) Write to domain_ips.txt file non-contiguous ip-blocks results.
 fn main() {
     let opts: Options = argh::from_env();
 
@@ -36,4 +47,12 @@ fn main() {
     scrape::google(&opts.host);
 
     brute::enumerate(&opts.host);
+
+    //
+    // #	6) Brute force subdomains from file (threaded).
+    // #	7) Calculate C class domain network ranges and perform whois
+    // #		queries on them (threaded).
+    // #	8) Perform reverse lookups on C class or/and whois
+    // #		network ranges (threaded).
+    // #	9) Write to domain_ips.txt file non-contiguous ip-blocks results.
 }
