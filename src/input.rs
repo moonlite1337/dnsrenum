@@ -1,8 +1,7 @@
 use argh::FromArgs;
 
-// dnsrenum options
 #[derive(FromArgs)]
-#[argh(description = "dnsrenum google.com")]
+#[argh(description = "dnsrenum zonetransfer.me")]
 pub struct Options {
     #[argh(positional, description = "host to get DNS records on")]
     pub host: String,
