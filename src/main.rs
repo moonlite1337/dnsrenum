@@ -1,5 +1,6 @@
 use argh;
 
+mod brute;
 mod info;
 mod input;
 mod requester;
@@ -30,4 +31,6 @@ fn main() {
         })
         .collect();
     requester::transfer_zones(opts.host.clone(), ns_domains);
+
+    brute::enumerate(opts.host.clone());
 }
