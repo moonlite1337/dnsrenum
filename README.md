@@ -2,9 +2,7 @@
 
 A repo is a work in progress.
 This is an attempt to rewrite perl script into a binary:
-https://github.com/fwaeytens/dnsenum
-
-Note: kali uses different (more up to date) version of dnsenum script.
+https://github.com/SparrowOchon/dnsenum2
 
 Features to add:
 
@@ -13,7 +11,7 @@ Features to add:
 - [x] add dns list
 - [x] zone transfer
 - [x] google first page scrape (optional)
-- [=] brute force using dns presets
+- [ ] brute force using dns presets
 - [ ] whois C class domain network ranges
 - [ ] reverse lookup on c class network ranges
 - [ ] Write to domain_ips.txt file non-contiguous ip-blocks results
