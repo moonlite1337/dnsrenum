@@ -16,7 +16,7 @@ macro_rules! print_record {
     };
 }
 
-pub fn print_records(title: &str, records: &Vec<Record>) {
+pub fn print_records(title: &str, records: &[Record]) {
     println!("{}\n", title.red().underline());
     if records.is_empty() {
         println!("Hmm... no records found. \n");
