@@ -26,6 +26,9 @@ use stdout::print_records;
 fn main() {
     let opts: Options = argh::from_env();
 
+    // testing
+    scrape::google(&"github.com".to_string());
+
     let s = Scanner::new(None).unwrap();
     let info = s.run(&opts.host).unwrap_or_else(|err| panic!("{}", err));
     print_records("Host addresses:", &info.ips);
