@@ -9,12 +9,17 @@ Note: kali uses different (more up to date) version of dnsenum script.
 Features to add:
 
 - [x] basic DNS lookup
-- [ ] help string
+- [x] help string
+- [x] add dns list
 - [x] zone transfer
+- [x] google first page scrape (optional)
 - [=] brute force using dns presets
+- [ ] whois C class domain network ranges
+- [ ] reverse lookup on c class network ranges
+- [ ] Write to domain_ips.txt file non-contiguous ip-blocks results
 - [ ] configure release mgmt
 - [ ] kali package
-- [ ] add dns list
+- [ ] find good to add features from subfinder and similar
 
 ## notes
 
