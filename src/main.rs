@@ -5,6 +5,7 @@ mod info;
 mod input;
 mod requester;
 mod scanner;
+mod scrape;
 mod stdout;
 
 use input::Options;
@@ -30,7 +31,9 @@ fn main() {
             name
         })
         .collect();
-    requester::transfer_zones(opts.host.clone(), ns_domains);
+    requester::transfer_zones(&opts.host, ns_domains);
 
-    brute::enumerate(opts.host.clone());
+    scrape::google(&opts.host);
+
+    brute::enumerate(&opts.host);
 }

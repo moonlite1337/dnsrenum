@@ -1,14 +1,13 @@
-use std::net::ToSocketAddrs;
-use std::thread;
 use colored::Colorize;
 use hickory_client::client::{Client, SyncClient};
 use hickory_client::rr::{DNSClass, Name, RecordType};
 use hickory_client::udp::UdpClientConnection;
-
+use std::net::ToSocketAddrs;
+use std::thread;
 
 // send AXFR query to every nameserver for given domain
 // https://gokhnayisigi.medium.com/what-is-a-dns-zone-transfer-attack-and-how-to-test-it-12bdc52da086
-pub fn transfer_zones(domain: String, ns: Vec<String>) {
+pub fn transfer_zones(domain: &String, ns: Vec<String>) {
     // make sure this request does not block
     println!(
         "\n{}\n",
@@ -24,14 +23,13 @@ pub fn transfer_zones(domain: String, ns: Vec<String>) {
             let address = addr.to_socket_addrs().unwrap().next().unwrap();
             let conn = UdpClientConnection::new(address).unwrap();
             let client = SyncClient::new(conn);
-            let r = client
-                .query(
-                    &name,
-                    DNSClass::IN,
-                    RecordType::AXFR,
-                )
-                .unwrap();
-            println!("{}, for: {} - {}", r.query().unwrap(), addr, r.header().response_code());
+            let r = client.query(&name, DNSClass::IN, RecordType::AXFR).unwrap();
+            println!(
+                "{}, for: {} - {}",
+                r.query().unwrap(),
+                addr,
+                r.header().response_code()
+            );
         })
     });
     for handle in threads {
