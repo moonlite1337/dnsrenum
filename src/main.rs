@@ -1,4 +1,4 @@
-use argh;
+use std::fs::File;
 
 mod brute;
 mod info;
@@ -26,6 +26,16 @@ use stdout::print_records;
 fn main() {
     let opts: Options = argh::from_env();
 
+    // test
+    match File::open(opts.dns.unwrap()) {
+        Ok(f) => {
+            brute::enumerate(f);
+        }
+        Err(e) => {
+            println!("\n could not open the file: {}", e);
+        }
+    };
+
     let s = Scanner::new(None).unwrap();
     let info = s.run(&opts.host).unwrap_or_else(|err| panic!("{}", err));
     print_records("Host addresses:", &info.ips);
@@ -48,7 +58,19 @@ fn main() {
         scrape::google(&opts.host).ok();
     }
 
-    brute::enumerate(&opts.host);
+    // if (opts.dns.is_none()) {
+    //     println!("\ndns file not provided, skipping brute force part..");
+    //     return;
+    // }
+    //
+    // match File::open(opts.dns.unwrap()) {
+    //     Ok(f) => {
+    //         brute::enumerate(f);
+    //     }
+    //     Err(e) => {
+    //         println!("\n could not open the file: {}", e);
+    //     }
+    // };
 
     //
     // #	6) Brute force subdomains from file (threaded).
