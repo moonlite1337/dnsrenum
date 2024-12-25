@@ -1,3 +1,4 @@
+use std::net::ToSocketAddrs;
 use colored::Colorize;
 use hickory_client::client::{Client, SyncClient};
 use hickory_client::rr::{DNSClass, Name, RecordType};
@@ -5,7 +6,6 @@ use hickory_client::udp::UdpClientConnection;
 
 pub fn transfer_zones(domain: String, ns: Vec<String>) {
     // make sure this request does not block
-    // todo!("reuse logger with verbosity levels")
     println!(
         "\n{}\n",
         "Trying Zone Transfers and getting Bind Versions:"
@@ -17,7 +17,7 @@ pub fn transfer_zones(domain: String, ns: Vec<String>) {
     // socket addr needs port
     let first = ns.first().unwrap();
     let addr = format!("{first}:53");
-    let address = addr.parse().unwrap();
+    let address = addr.to_socket_addrs().unwrap().next().unwrap();
     let conn = UdpClientConnection::new(address).unwrap();
     let client = SyncClient::new(conn);
     let r = client
@@ -27,7 +27,7 @@ pub fn transfer_zones(domain: String, ns: Vec<String>) {
             RecordType::AXFR,
         )
         .unwrap();
-    println!("{}", r.to_string());
+    println!("{} - {}", r.query().unwrap(), r.header().response_code());
     // let threads: Vec<_> = ns
     //     .into_iter()
     //     .map(|ns| {

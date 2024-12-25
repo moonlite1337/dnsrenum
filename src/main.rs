@@ -13,8 +13,8 @@ use stdout::print_records;
 fn main() {
     let opts: Options = argh::from_env();
 
-    // todo!("revert");
-    if (opts.host != "google.com") {
+    // todo!("revert")
+    if (opts.host != "zonetransfer.me") {
         let s = Scanner::new(None).unwrap();
         let info = s.run(&opts.host).unwrap_or_else(|err| panic!("{}", err));
         print_records("Host addresses:", &info.ips);
