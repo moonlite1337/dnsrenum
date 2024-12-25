@@ -129,6 +129,10 @@
 996
 997
 999
+RKW-ONAFTS-TEST
+_sip
+_spf
+_tls
 a
 a-servers
 abc
@@ -145,6 +149,7 @@ acp1
 act
 adl
 admin
+adminer
 administrador
 administrator
 ads
@@ -177,8 +182,8 @@ airramstein
 airtest
 alaune
 albert-2
-albert-deux
 albert-II
+albert-deux
 albert-twee
 albert2
 albertdeux
@@ -213,6 +218,7 @@ attest-acc
 attest-test
 auditinternetresorerie
 australia
+autodiscover
 av
 avatar
 b-fast
@@ -388,6 +394,8 @@ deambachten
 deambachten-acc
 debtagency
 demadelief
+dev
+development
 developpement
 dfi
 di
@@ -551,6 +559,8 @@ fr
 fra
 frdo
 frdo-cfdd
+fs
+fs1
 fso
 fsoffe
 ftp
@@ -566,9 +576,9 @@ gamingcommission
 gas2020gaz
 gaz2020
 ge-nl
+geh\228lter
 gehaelter
 gehalter
-geh\228lter
 gemsz
 genootschap
 gesundheit
@@ -745,6 +755,7 @@ kcenet
 kcetools
 kenniscentrum
 kfor
+kibana
 kim
 kinderbijslag
 klassieke-varkenspest
@@ -809,6 +820,7 @@ lo
 log
 logo
 logos
+logstash
 lokal-polizei
 lokale-politie
 lokalepolitie
@@ -883,6 +895,7 @@ mobility
 mobilityweek
 monarchie
 monarchy
+monit
 moniteur
 moot-servers
 morello
@@ -978,6 +991,7 @@ ns01
 ns02
 ns1
 ns2
+ns3
 nsa
 nshq
 nss
@@ -1046,6 +1060,7 @@ ontwikkelings-samenwerking
 ontwikkelingssamenwerking
 onva
 onva-rjv
+origin
 osone
 ossom
 ossom-dosz
@@ -1087,11 +1102,13 @@ phimail
 phone
 phpbalancer
 phpbalancer-stag
+phpmyadmin
 phpwf
 phytoweb
 plan
 plan2004
 plda
+pma
 po
 polfed
 police
@@ -1153,7 +1170,9 @@ private-veilligheid
 privatesecurity
 privatesicherheit
 privateveilligheid
+prod
 prodcom
+production
 projects
 protectioncivile
 pub
@@ -1208,7 +1227,6 @@ rjv
 rjv-onva
 rkw
 rkw-onafts
-RKW-ONAFTS-TEST
 root
 route
 router
@@ -1277,6 +1295,7 @@ shop
 shop-info
 shopinfo
 sibelius
+siem
 sigedis
 silberfonds
 simplification
@@ -1308,6 +1327,7 @@ snislnmail3
 snislnmail4
 snislnmail5
 snmg1
+snmp
 snpl01
 sobane
 sociaaltarief
@@ -1331,12 +1351,18 @@ sp
 spam
 spp
 sql
+sql1
+sql2
+sql3
 ssc
 ssh
 staatsblad
 staatsrat
+stage
+staging
 starfighter
 statbel
+static
 stats
 stcw95
 stis
@@ -1351,6 +1377,7 @@ surveykce
 sw
 swtc02
 sylvie
+syslog
 ta
 taalnet
 taccp
@@ -1458,6 +1485,7 @@ win
 windows
 workinginbelgium
 ww
+ww3
 www
 www2
 wwww
@@ -1466,15 +1494,12 @@ xbrl-acc
 xbrl-tst
 xml
 xmmxprod1
+zdfageh\228lter
 zdfagehaelter
 zdfagehalter
-zdfageh\228lter
 zdfapensionen
 zensus
 zensus2011
 zfa
 zilverfonds
 zoek
-_sip
-_spf
-_tls

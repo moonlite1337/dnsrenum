@@ -15,3 +15,11 @@ Features to add:domain transfer
 - [ ] configure release mgmt
 - [ ] kali package
 - [ ] add dns list
+
+## notes
+
+recommended DNS list:
+https://github.com/danielmiessler/SecLists/tree/master/Discovery/DNS
+
+current data/example.txt is copied from:
+https://github.com/SparrowOchon/dnsenum2/blob/master/dns.txt
